@@ -3,10 +3,18 @@ from re import sub
 
 def is_palindrome(sentence):
     # TODO: return True or False if the sentence is or isn't a palindrome
-    output_sentence = sub(r'[^a-z]','',sentence.lower().strip())
+    cleaned_sentence = sub(r'[^a-z]','',sentence.lower().strip())
+    sentence_list = list(cleaned_sentence)
     palindrome = []
-    for index in range(len(output_sentence)//2):
-        if output_sentence[index] == output_sentence[::-index-1]:
+    for _ in range(len(sentence_list)//2-1):
+        if len(sentence_list) >= 2:
+            left = sentence_list.pop(0)
+            right = sentence_list.pop(-1)
+            if left == right or len(sentence_list) == 0:
+                palindrome.append(True)
+            else:
+                palindrome.append(False)
+        elif len(sentence_list) == 1:
             palindrome.append(True)
         else:
             palindrome.append(False)
@@ -25,9 +33,7 @@ def main():
             print("{} is a palindrome!".format(sentence))
         else:
             print("{} is not a palindrome.".format(sentence))
-    else:
-        print("Your input did not contain any letters!")
-        main()
+
 
 if __name__ == '__main__':
     main()
