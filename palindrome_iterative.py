@@ -21,8 +21,7 @@ def main():
         is_palindrome(list(output_sentence))
     else:
         return False, "is not a palindrome"
-        main()
-
+        
 
 if __name__ == '__main__':
     main()
