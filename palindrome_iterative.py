@@ -1,6 +1,5 @@
 def is_palindrome(sentence):
     # TODO: return True or False if the sentence is or isn't a palindrome
-    index = 0
     palendrome = []
     for index in range(len(sentence)//2):
         if sentence[index] == sentence[::-index-1]:
@@ -16,18 +15,14 @@ def is_palindrome(sentence):
 
 def main():
     # TODO: put your input/output code here
-    sentence = input("Please enter your text.\n> ").lower()
-    # I am looking to strip all extraneous characters; make sure has characters
-    sentence_list = []
-    for char in sentence:
-        if char in "abcdefghijklmnopqrstuvwxyz":
-            sentence_list.append(char)
-
-    if len(sentence_list) > 0:
-        is_palindrome(''.join(sentence_list))
+    sentence = input("Please enter your text.\n> ").lower().strip()
+    output_sentence = sub(r'[^A-Za-z]','',sentence)
+    if len(output_sentence) > 0:
+        is_palindrome(list(output_sentence))
     else:
-        print("You did not enter any alphabetical characters.")
+        return False, "is not a palindrome"
         main()
+
 
 if __name__ == '__main__':
     main()
