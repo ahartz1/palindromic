@@ -1,39 +1,33 @@
+from re import sub
+
+
 def is_palindrome(sentence):
     # TODO: return True or False if the sentence is or isn't a palindrome
-    palendrome = []
-    for index in range(len(sentence)//2):
-        if sentence[index] == sentence[::-index-1]:
-            palendrome.append(True)
+    output_sentence = sub(r'[^a-z]','',sentence.lower().strip())
+    palindrome = []
+    for index in range(len(output_sentence)//2):
+        if output_sentence[index] == output_sentence[::-index-1]:
+            palindrome.append(True)
         else:
-            palendrome.append(False)
+            palindrome.append(False)
 
-    if palendrome.count(False) > 0:
-        return False, "is not a palindrome"
+    if palindrome.count(False) > 0:
+        return False
     else:
-        return True, "is a palindrome"
+        return True
 
 
 def main():
     # TODO: put your input/output code here
-    sentence = input("Please enter your text.\n> ").lower().strip()
-    output_sentence = sub(r'[^A-Za-z]','',sentence)
-    if len(output_sentence) > 0:
-        is_palindrome(list(output_sentence))
+    sentence = input("Please enter your text.\n> ")
+    if len(sentence) > 0:
+        if is_palindrome(sentence):
+            print("{} is a palindrome!".format(sentence))
+        else:
+            print("{} is not a palindrome.".format(sentence))
     else:
-        return False, "is not a palindrome"
-        
+        print("Your input did not contain any letters!")
+        main()
 
 if __name__ == '__main__':
     main()
-
-
-'''
-Recursive idea:
-1. Lowercase and take only letters before recursive loop
-2. Base case: if len is 1 or 0, return "is a palendrome"
-3. Take the outer letters off; if they are equal, recurse.
-
-Iterative idea:
-1. Lowercase and take only letters
-
-'''
