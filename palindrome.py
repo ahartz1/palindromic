@@ -1,17 +1,11 @@
 def is_palindrome(sentence):
     # TODO: return True or False if the sentence is or isn't a palindrome
-    index = 0
-    palendrome = []
-    for index in range(len(sentence)//2):
-        if sentence[index] == sentence[::-index-1]:
-            palendrome.append(True)
-        else:
-            palendrome.append(False)
-
-    if palendrome.count(False) > 0:
-        return False, "is not a palindrome"
-    else:
+    if len(sentence) <= 1:
         return True, "is a palindrome"
+    elif sentence[0] == sentence[-1]:
+         return is_palindrome(sentence[1:-2])
+    else:
+        return False, "is not a palindrome"
 
 
 def main():
@@ -24,7 +18,7 @@ def main():
             sentence_list.append(char)
 
     if len(sentence_list) > 0:
-        is_palindrome(''.join(sentence_list))
+        is_palindrome(sentence_list)
     else:
         print("You did not enter any alphabetical characters.")
         main()
