@@ -4,12 +4,17 @@ from re import sub
 def is_palindrome(sentence):
     # TODO: return True or False if the sentence is or isn't a palindrome
     output_sentence = sub(r'[^a-z]','',sentence.lower().strip())
-    if len(output_sentence) <= 1:
-        return True
-    elif output_sentence[0] == output_sentence[-1]:
-         return is_palindrome(output_sentence[1:-1])
-    else:
+    palindrome = []
+    for index in range(len(output_sentence)//2):
+        if output_sentence[index] == output_sentence[::-index-1]:
+            palindrome.append(True)
+        else:
+            palindrome.append(False)
+
+    if palindrome.count(False) > 0:
         return False
+    else:
+        return True
 
 
 def main():
@@ -26,15 +31,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-'''
-Recursive idea:
-1. Lowercase and take only letters before recursive loop
-2. Base case: if len is 1 or 0, return "is a palendrome"
-3. Take the outer letters off; if they are equal, recurse.
-
-Iterative idea:
-1. Lowercase and take only letters
-
-'''
